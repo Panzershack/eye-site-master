@@ -1,5 +1,4 @@
 import { useState } from "react";
-import BackButton from "../../components/backButton";
 import Spinner from "../../components/spinner";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -31,10 +30,8 @@ const CreateConsultation = () => {
 
   return (
     <div className="p-4">
-      <BackButton />
-      <h1 className="text-3xl my-4">Create Consultation</h1>
       {loading ? <Spinner /> : ""}
-      <div className="flex flex-col border-2 border-red-400 rounded-xl w-[600px] p-4 mx-auto">
+      <div className="flex flex-col border-2 border-red-400 rounded-xl w-[600px] p-4 mx-auto bg-white mt-4">
         <div className="my-4">
           <label className="text-xl mr-4 text-grey-500">ConsultationDate</label>
           <input

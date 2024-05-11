@@ -1,9 +1,9 @@
-import { useState } from "react";
-import ConsultationsFormComponent from "../pages/consultations/Home";
-import InquiriesFormComponent from "../pages/inquiries/Home";
+// import { useState } from "react";
+import ConsultationsFormComponent from "../pages/consultations/CreateConsultation";
+import InquiriesFormComponent from "../pages/inquiries/CreateInquiry";
 
 const OurServicesComponent = () => {
-  const [count, setCount] = useState(0);
+  // const [count, setCount] = useState(0);
 
   return (
     <div className="app">
