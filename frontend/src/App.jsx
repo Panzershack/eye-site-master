@@ -13,17 +13,22 @@ import Navbar from './components/navbar';
 // import ShowInquiry from './pages/inquiries/ShowInquiry';
 // import HomeInq from './pages/inquiries/Home';
 
+import CreateItem from './pages/items/CreateItem';
+import ShowItem from './pages/items/ShowItem';
+
 import OurServicesComponent from './pages/OurServicesComponent';
 import AdminDashBoardComponent from './pages/AdminDashBoard';
+
+
+
 
 const App = () => {
   //5 routes are creayed for 5 different pages
   return (
     <>
-    <Navbar/>
-    <Routes>
-
-      {/* <Route path='/consultations/home' element={<HomeCons/>}/>
+      <Navbar />
+      <Routes>
+        {/* <Route path='/consultations/home' element={<HomeCons/>}/>
       <Route path='/consultations/create' element={<CreateConsultation/>}/>
       <Route path='/consultations/details/:id' element={<ShowConsultation/>}/>
       <Route path='/consultations/edit/:id' element={<EditConsultation/>}/>
@@ -34,9 +39,12 @@ const App = () => {
       <Route path='/inquiries/edit/:id' element={<EditInquiry/>}/>
       <Route path='/inquiries/delete/:id' element={<DeleteInquiry/>}/> */}
 
-      <Route path='/admin' element={<AdminDashBoardComponent/>}/>
-      <Route path='/' element={<OurServicesComponent/>}></Route>
-    </Routes>
+        <Route path="/admin" element={<AdminDashBoardComponent />} />
+        <Route path="/" element={<OurServicesComponent />}></Route>
+
+        <Route path="/items/details/:id" element={< ShowItem/>} />
+        <Route path="/items/create" element={< CreateItem/>} />
+      </Routes>
     </>
   );
 }

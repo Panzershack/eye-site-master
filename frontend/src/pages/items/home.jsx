@@ -14,7 +14,7 @@ const Home = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`http://localhost:5500/items`)
+      .get(`http://localhost:5555/items`)
       .then((res) => {
         setItems(res.data.data);
         setLoading(false);
