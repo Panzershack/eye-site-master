@@ -1,47 +1,56 @@
-import { useState } from "react"
-import BackButton from "../../components/backButton"
-import Spinner from "../../components/spinner"
-import axios from "axios"
-import { useNavigate, useParams } from "react-router-dom"
+import { useState } from "react";
+import Spinner from "../../components/spinner";
+import PropTypes from "prop-types";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-const DeleteConsultation = () => {
+const DeleteConsultation = ({ consultationId }) => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const {id} = useParams();
+
   const handleDeleteConsultation = () => {
     setLoading(true);
     axios
-      .delete(`http://localhost:5555/consultations/${id}`)
+      .delete(`http://localhost:5555/consultations/${consultationId}`)
       .then(() => {
         setLoading(false);
-        navigate(`/`);
+        navigate(`/admin`, { replace: true }); // Reload the page
+        window.location.reload(); // Reload the page
       })
       .catch((error) => {
         setLoading(false);
-        alert("An error has occured, please check console");
+        alert("An error has occurred, please check console");
         console.log(error);
       });
+  };
 
-
-  }
   return (
     <div className="p-4 ">
-      <BackButton/>
       <h1 className="text-3xl my-4">Delete Consultation</h1>
-      {loading ? <Spinner/> : " "}
-      <div className="flex flex-col items-center border-2 border-red-400 rounded-xl w-[600px] p-8 mx-auto">
-        <h3 className="text-2xl">Are you sure you want to delete this consultation?</h3>
+      {loading ? (
+        <Spinner />
+      ) : (
+        <div className="flex flex-col items-center border-2 border-red-400 rounded-xl w-[600px] p-8 mx-auto">
+          <h3 className="text-2xl">
+            Are you sure you want to delete this consultation?
+          </h3>
 
-        <button
-        className="p-4 bg-red-600 text-white m-8 w-full"
-        onClick={handleDeleteConsultation}
-        >
-          Yes, Delete Consultation
-        </button>
-      </div>
+          <button
+            className="p-4 bg-red-600 text-white m-8 w-full"
+            onClick={handleDeleteConsultation}
+          >
+            Yes, Delete Consultation
+          </button>
+        </div>
+      )}
       <div></div>
     </div>
-  )
-}
+  );
+};
 
-export default DeleteConsultation
+// Define prop types
+DeleteConsultation.propTypes = {
+  consultationId: PropTypes.string.isRequired,
+};
+
+export default DeleteConsultation;

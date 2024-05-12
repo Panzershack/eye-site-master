@@ -7,6 +7,7 @@ import consultationsRoute from "./routes/consultationsRoutes.js"
 import inquiriesRouter from "./routes/inquiriesRoute.js"
 import suppliersRouter from "./routes/suppliersRoute.js"
 import employeeRouter from "./routes/employeeRoute.js"
+import ItemRouter from "./routes/itemsRoute.js"
 
 const app = express();
 
@@ -33,6 +34,7 @@ app.use('/consultations', consultationsRoute); //middleware to use routes
 app.use("/inquiries", inquiriesRouter);
 app.use("/suppliers", suppliersRouter);
 app.use("/employees", employeeRouter);
+app.use("/items", ItemRouter);
 
 
 

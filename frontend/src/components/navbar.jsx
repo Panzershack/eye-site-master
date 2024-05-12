@@ -15,10 +15,10 @@ const Navbar = () => {
           <Link to="/">Home</Link>
         </li>
         <li>
-          <Link to="/consultations/create">Create Consultation</Link>
+          <Link to="/Products">Products</Link>
         </li>
         <li>
-          <Link to="/about">About</Link>
+          <Link to="/admin">Our Services</Link>
         </li>
         {/* Add more navigation links as needed */}
       </ul>
