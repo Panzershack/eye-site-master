@@ -14,15 +14,15 @@ const AdminDashBoard = () => {
     <div className="app">
       <div
         className="section section1"
-        style={{ width: "100vw", height: "100vh", backgroundColor: "yellow" }}
+        style={{ width: "100vw", height: "100vh", border: "5px solid black" }}
       >
-        <ConsultationsTableComponent/>
+        <ConsultationsTableComponent />
       </div>
 
       {/* Section 2 */}
       <div
         className="section section1"
-        style={{ width: "100vw", height: "100vh", backgroundColor: "red" }}
+        style={{ width: "100vw", height: "100vh", border: "5px solid black" }}
       >
         <InquiriesTableComponent />
         {/* Content for Section 1 */}
@@ -31,7 +31,7 @@ const AdminDashBoard = () => {
       {/* Section 3 */}
       <div
         className="section section1"
-        style={{ width: "100vw", height: "100vh", backgroundColor: "green" }}
+        style={{ width: "100vw", height: "100vh", border: "5px solid black" }}
       >
         <EmployeeTableComponent />
         {/* Content for Section 1 */}
@@ -40,7 +40,7 @@ const AdminDashBoard = () => {
       {/* Section 4 */}
       <div
         className="section section1"
-        style={{ width: "100vw", height: "100vh", backgroundColor: "yellow" }}
+        style={{ width: "100vw", height: "100vh", border: "5px solid black" }}
       >
         <ItemTableComponent />
         {/* Content for Section 1 */}
@@ -48,7 +48,7 @@ const AdminDashBoard = () => {
       {/* Section 5 */}
       <div
         className="section section1"
-        style={{ width: "100vw", height: "100vh", backgroundColor: "blue" }}
+        style={{ width: "100vw", height: "100vh", border: "5px solid black" }}
       >
         <SupplierTableComponent />
         {/* Content for Section 1 */}

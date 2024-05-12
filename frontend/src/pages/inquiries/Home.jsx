@@ -5,7 +5,6 @@ import { AiOutlineEdit } from "react-icons/ai";
 import { BsInfoCircle } from "react-icons/bs";
 import { MdOutlineAddBox, MdOutlineDelete } from "react-icons/md";
 import Spinner from "../../components/spinner";
-import SearchBar from '../../components/backButton';
 
 const HomeInq = () => {
   const [inquiries, setInquiries] = useState([]);
@@ -26,13 +25,6 @@ const HomeInq = () => {
       });
   }, []);
 
-  const handleSearch= (searchQuery) => {
-    const filtered = inquiries.filter((inquiry) =>
-      inquiry.Email.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-    setFilteredInquiries(filtered);
-  };
-
   const handleBack = () => {
     setFilteredInquiries([]); // Clear filtered inquiries
   };
@@ -47,7 +39,6 @@ const HomeInq = () => {
       </div>
       
       <div className="flex justify-between items-center mb-4">
-        <SearchBar onSearch={handleSearch} />
         {filteredInquiries.length > 0 && (
           <button onClick={handleBack} className="p-2 bg-sky-300">
             Back to Inquiry List

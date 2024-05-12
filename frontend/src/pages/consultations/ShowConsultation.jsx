@@ -1,18 +1,16 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
-import BackButton from "../../components/backButton";
+import PropTypes from "prop-types"; // Import PropTypes
 import Spinner from "../../components/spinner";
 
-const ShowConsultation = () => {
+const ShowConsultation = ({ consultationId }) => {
   const [consultation, setConsultation] = useState({});
   const [loading, setLoading] = useState(false);
-  const { id } = useParams();
 
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`http://localhost:5555/consultations/${id}`)
+      .get(`http://localhost:5555/consultations/${consultationId}`)
       .then((res) => {
         setConsultation(res.data);
         setLoading(false);
@@ -21,7 +19,7 @@ const ShowConsultation = () => {
         console.log(error);
         setLoading(false);
       });
-  }, [id]);
+  }, [consultationId]);
 
   // Function to format the date
   const formatDate = (dateString) => {
@@ -31,7 +29,6 @@ const ShowConsultation = () => {
 
   return (
     <div className="p-4">
-      <BackButton />
       <h1 className="text-3xl my-4">Show Consultation</h1>
       {loading ? (
         <Spinner />
@@ -67,6 +64,11 @@ const ShowConsultation = () => {
       )}
     </div>
   );
+};
+
+// Define prop types
+ShowConsultation.propTypes = {
+  consultationId: PropTypes.string.isRequired,
 };
 
 export default ShowConsultation;

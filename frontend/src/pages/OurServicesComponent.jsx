@@ -10,7 +10,7 @@ const OurServicesComponent = () => {
       {/* Section 1 */}
       <div
         className="section section1"
-        style={{ width: "100vw", height: "100vh", backgroundColor: "yellow" }}
+        style={{ width: "100vw", height: "100vh", border: "5px solid black" }}
       >
         {/* Content for Section 1 */}
       </div>
@@ -18,15 +18,15 @@ const OurServicesComponent = () => {
       {/* Section 2 */}
       <div
         className="section section2"
-        style={{ width: "100vw", height: "100vh", backgroundColor: "red" }}
+        style={{ width: "100vw", height: "100vh", border: "5px solid black" }}
       >
-        <ConsultationsFormComponent/>
+        <ConsultationsFormComponent />
       </div>
 
       {/* Section 3 */}
       <div
         className="section section3"
-        style={{ width: "100vw", height: "100vh", backgroundColor: "green" }}
+        style={{ width: "100vw", height: "100vh", border: "5px solid black" }}
       >
         {/* Content for Section 3 */}
       </div>
@@ -34,9 +34,9 @@ const OurServicesComponent = () => {
       {/* Section 4 */}
       <div
         className="section section4"
-        style={{ width: "100vw", height: "100vh", backgroundColor: "blue" }}
+        style={{ width: "100vw", height: "100vh", border: "5px solid black" }}
       >
-        <InquiriesFormComponent/>
+        <InquiriesFormComponent />
       </div>
     </div>
   );
