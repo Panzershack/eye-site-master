@@ -1,7 +1,7 @@
 import ConsultationsTableComponent from "../pages/consultations/Home";
 import InquiriesTableComponent from "../pages/inquiries/Home";
 import EmployeeTableComponent from "../pages/employees/Home";
-import ItemTableComponent from "../pages/items/Home";
+import ItemTableComponent from "../pages/items/home";
 import SupplierTableComponent from "../pages/suppliers/home";
 
 
