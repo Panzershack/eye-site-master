@@ -18,8 +18,7 @@ const Home = () => {
   const [startIndex, setStartIndex] = useState(0);
   const [selectedInfoEmployeeId, setSelectedInfoEmployeeId] = useState(null);
   const [selectedEditEmployeeId, setSelectedEditEmployeeId] = useState(null);
-  const [selectedDeleteEmployeeId, setSelectedDeleteEmployeeId] =
-    useState(null);
+  const [selectedDeleteEmployeeId, setSelectedDeleteEmployeeId] = useState(null);
 
   useEffect(() => {
     setLoading(true);
