@@ -61,18 +61,18 @@ const HomeCons = () => {
         <Spinner />
       ) : (
         <div className="overflow-x-auto">
-          <table className="w-full border border-gray-300">
-            <thead>
-              <tr className="bg-gray-200">
-                <th className="px-4 py-2 border border-black">No</th>
-                <th className="px-4 py-2 border border-black">
+          <table className="w-full bg-white shadow-md rounded-lg overflow-hidden">
+            <thead className="bg-gray-200 text-gray-700">
+              <tr>
+                <th className="px-4 py-2 border border-grey-300">No</th>
+                <th className="px-4 py-2 border border-grey-300">
                   Consultation Date
                 </th>
-                <th className="px-4 py-2 border border-black">
+                <th className="px-4 py-2 border border-grey-300">
                   Consultation Text
                 </th>
-                <th className="px-4 py-2 border border-black">Test Details</th>
-                <th className="px-4 py-2 border border-black">Operations</th>
+                <th className="px-4 py-2 border border-grey-300">Test Details</th>
+                <th className="px-4 py-2 border border-grey-300">Operations</th>
               </tr>
             </thead>
             <tbody>
@@ -80,25 +80,25 @@ const HomeCons = () => {
                 .slice(startIndex, startIndex + 10)
                 .map((consultation, index) => (
                   <tr key={consultation._id} className="bg-white">
-                    <td className="px-4 py-2 border border-black">
+                    <td className="px-4 py-2 border border-grey-300">
                       {startIndex + index + 1}
                     </td>
-                    <td className="px-4 py-2 border border-black">
+                    <td className="px-4 py-2 border border-grey-300">
                       {formatDate(consultation.consultationDate)}
                     </td>
                     <td
-                      className="px-4 py-2 border border-black"
+                      className="px-4 py-2 border border-grey-300"
                       style={{ maxWidth: "200px", wordWrap: "break-word" }}
                     >
                       {consultation.consultationText}
                     </td>
                     <td
-                      className="px-4 py-2 border border-black"
+                      className="px-4 py-2 border border-grey-300"
                       style={{ maxWidth: "200px", wordWrap: "break-word" }}
                     >
                       {consultation.testDetails}
                     </td>
-                    <td className="px-4 py-2 border border-black">
+                    <td className="px-4 py-2 border border-grey-300">
                       <div className="flex gap-x-4 justify-center">
                         <button
                           onClick={() =>

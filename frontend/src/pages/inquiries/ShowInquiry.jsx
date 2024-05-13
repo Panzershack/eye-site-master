@@ -1,20 +1,16 @@
-import { useEffect, useState } from "react"
-import axios from "axios"
-import { useParams } from "react-router-dom"
-import BackButton from "../../components/backButton"
-import Spinner from "../../components/spinner"
+import { useEffect, useState } from "react";
+import axios from "axios";
+import Spinner from "../../components/spinner";
+import PropTypes from "prop-types";
 
-
-
-const ShowInquiry = () => {
+const ShowInquiry = ({ inquiryId }) => {
   const [inquiry, setInquiry] = useState({});
   const [loading, setLoading] = useState(false);
-  const { id } = useParams();
 
   useEffect(() => {
-    setLoading(true)
+    setLoading(true);
     axios
-      .get(`http://localhost:5555/inquiries/${id}`)
+      .get(`http://localhost:5555/inquiries/${inquiryId}`)
       .then((res) => {
         setInquiry(res.data);
         setLoading(false);
@@ -23,11 +19,10 @@ const ShowInquiry = () => {
         console.log(error);
         setLoading(false);
       });
-  }, [id])
+  }, [inquiryId]);
 
   return (
     <div className="p-4">
-      <BackButton/>
       <h1 className="text-3xl my-4">Show Inquiry</h1>
       {loading ? (
         <Spinner />
@@ -63,6 +58,12 @@ const ShowInquiry = () => {
       )}
     </div>
   );
-}
+};
 
-export default ShowInquiry
+// Define prop types
+ShowInquiry.propTypes = {
+  inquiryId: PropTypes.string.isRequired,
+};
+
+
+export default ShowInquiry;
