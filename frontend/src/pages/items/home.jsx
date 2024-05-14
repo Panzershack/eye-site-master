@@ -20,6 +20,8 @@ const Home = () => {
   const [selectedInfoItemId, setSelectedInfoItemId] = useState(null);
   const [selectedEditItemId, setSelectedEditItemId] = useState(null);
   const [selectedDeleteItemId, setSelectedDeleteItemId] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredItems, setFilteredItems] = useState([]);
 
   useEffect(() => {
     setLoading(true);
@@ -36,6 +38,18 @@ const Home = () => {
       });
   }, []);
 
+  useEffect(() => {
+    // Filter items based on search query
+    if (searchQuery.trim() === "") {
+      setFilteredItems(items);
+    } else {
+      const filtered = items.filter((item) =>
+        item.title.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      setFilteredItems(filtered);
+    }
+  }, [searchQuery, items]);
+
   const handleDownClick = () => {
     if (startIndex + 5 < items.length) {
       setStartIndex((prevIndex) => prevIndex + 1);
@@ -48,13 +62,26 @@ const Home = () => {
     }
   };
 
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
   return (
     <div className="p-4">
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-3xl">Item List</h1>
-        <button onClick={() => setShowCreateModal(true)}>
-          <MdOutlineAddBox className="text-4xl text-red-600" />
-        </button>
+        <div className="flex items-center">
+          <input
+            type="text"
+            placeholder="Search item brand"
+            value={searchQuery}
+            onChange={handleSearchChange}
+            className="px-4 py-2 border border-gray-300 rounded-l"
+          />
+          <button onClick={() => setShowCreateModal(true)}>
+            <MdOutlineAddBox className="text-4xl text-red-600" />
+          </button>
+        </div>
       </div>
       {loading ? (
         <Spinner />
@@ -89,101 +116,107 @@ const Home = () => {
                 </tr>
               </thead>
               <tbody>
-                {items.slice(startIndex, startIndex + 5).map((item, index) => (
-                  <tr key={index} className="bg-white">
-                    <td className="px-4 py-2 border border-black">
-                      {startIndex + index + 1}
-                    </td>
-                    <td className="px-4 py-2 border border-black">
-                      {item.title}
-                    </td>
-                    <td className="px-4 py-2 border border-black">
-                      {item.price}
-                    </td>
-                    <td className="px-4 py-2 border border-black">
-                      {item.company}
-                    </td>
-                    <td className="px-4 py-2 border border-black">
-                      {item.colour}
-                    </td>
-                    <td className="px-4 py-2 border border-black">
-                      {item.category}
-                    </td>
-                    <td className="px-4 py-2 border border-black">
-                      {item.description}
-                    </td>
-                    <td className="px-4 py-2 border border-black">
-                      <img
-                        src={item.image}
-                        alt={item.title}
-                        className="h-10 w-10"
-                      />
-                    </td>
-                    <td className="px-4 py-2 border border-black">
-                      <div className="flex justify-center">
-                        <button onClick={() => setSelectedInfoItemId(item._id)}>
-                          <BsInfoCircle className="text-green-800 text-2xl mx-2" />
-                        </button>
-                        <Modal
-                          isOpen={selectedInfoItemId === item._id}
-                          onRequestClose={() => setSelectedInfoItemId(null)}
-                          style={{
-                            content: {
-                              top: "50%",
-                              left: "50%",
-                              right: "auto",
-                              bottom: "auto",
-                              marginRight: "-50%",
-                              transform: "translate(-50%, -50%)",
-                            },
-                          }}
-                        >
-                          <ShowItem itemId={item._id} />
-                        </Modal>
-                        <button onClick={() => setSelectedEditItemId(item._id)}>
-                          <AiOutlineEdit className="text-yellow-600 text-2xl mx-2" />
-                        </button>
-                        <Modal
-                          isOpen={selectedEditItemId === item._id}
-                          onRequestClose={() => setSelectedEditItemId(null)}
-                          style={{
-                            content: {
-                              top: "50%",
-                              left: "50%",
-                              right: "auto",
-                              bottom: "auto",
-                              marginRight: "-50%",
-                              transform: "translate(-50%, -50%)",
-                            },
-                          }}
-                        >
-                          <EditItem itemId={item._id} />
-                        </Modal>
-                        <button
-                          onClick={() => setSelectedDeleteItemId(item._id)}
-                        >
-                          <MdOutlineDelete className="text-red-600 text-2xl mx-2" />
-                        </button>
-                        <Modal
-                          isOpen={selectedDeleteItemId === item._id}
-                          onRequestClose={() => setSelectedDeleteItemId(null)}
-                          style={{
-                            content: {
-                              top: "50%",
-                              left: "50%",
-                              right: "auto",
-                              bottom: "auto",
-                              marginRight: "-50%",
-                              transform: "translate(-50%, -50%)",
-                            },
-                          }}
-                        >
-                          <DeleteItem itemId={item._id} />
-                        </Modal>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
+                {filteredItems
+                  .slice(startIndex, startIndex + 5)
+                  .map((item, index) => (
+                    <tr key={index} className="bg-white">
+                      <td className="px-4 py-2 border border-black">
+                        {startIndex + index + 1}
+                      </td>
+                      <td className="px-4 py-2 border border-black">
+                        {item.title}
+                      </td>
+                      <td className="px-4 py-2 border border-black">
+                        {item.price}
+                      </td>
+                      <td className="px-4 py-2 border border-black">
+                        {item.company}
+                      </td>
+                      <td className="px-4 py-2 border border-black">
+                        {item.colour}
+                      </td>
+                      <td className="px-4 py-2 border border-black">
+                        {item.category}
+                      </td>
+                      <td className="px-4 py-2 border border-black">
+                        {item.description}
+                      </td>
+                      <td className="px-4 py-2 border border-black">
+                        <img
+                          src={item.image}
+                          alt={item.title}
+                          className="h-10 w-10"
+                        />
+                      </td>
+                      <td className="px-4 py-2 border border-black">
+                        <div className="flex justify-center">
+                          <button
+                            onClick={() => setSelectedInfoItemId(item._id)}
+                          >
+                            <BsInfoCircle className="text-green-800 text-2xl mx-2" />
+                          </button>
+                          <Modal
+                            isOpen={selectedInfoItemId === item._id}
+                            onRequestClose={() => setSelectedInfoItemId(null)}
+                            style={{
+                              content: {
+                                top: "50%",
+                                left: "50%",
+                                right: "auto",
+                                bottom: "auto",
+                                marginRight: "-50%",
+                                transform: "translate(-50%, -50%)",
+                              },
+                            }}
+                          >
+                            <ShowItem itemId={item._id} />
+                          </Modal>
+                          <button
+                            onClick={() => setSelectedEditItemId(item._id)}
+                          >
+                            <AiOutlineEdit className="text-yellow-600 text-2xl mx-2" />
+                          </button>
+                          <Modal
+                            isOpen={selectedEditItemId === item._id}
+                            onRequestClose={() => setSelectedEditItemId(null)}
+                            style={{
+                              content: {
+                                top: "50%",
+                                left: "50%",
+                                right: "auto",
+                                bottom: "auto",
+                                marginRight: "-50%",
+                                transform: "translate(-50%, -50%)",
+                              },
+                            }}
+                          >
+                            <EditItem itemId={item._id} />
+                          </Modal>
+                          <button
+                            onClick={() => setSelectedDeleteItemId(item._id)}
+                          >
+                            <MdOutlineDelete className="text-red-600 text-2xl mx-2" />
+                          </button>
+                          <Modal
+                            isOpen={selectedDeleteItemId === item._id}
+                            onRequestClose={() => setSelectedDeleteItemId(null)}
+                            style={{
+                              content: {
+                                top: "50%",
+                                left: "50%",
+                                right: "auto",
+                                bottom: "auto",
+                                marginRight: "-50%",
+                                transform: "translate(-50%, -50%)",
+                              },
+                            }}
+                          >
+                            <DeleteItem itemId={item._id} />
+                          </Modal>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
               </tbody>
             </table>
           </div>

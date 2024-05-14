@@ -59,18 +59,48 @@ const EditItem = ({ itemId }) => {
       });
   };
 
-  function convertToBase64(e) {
-    console.log(e);
-    var reader = new FileReader();
-    reader.readAsDataURL(e.target.files[0]);
-    reader.onload = function () {
-      console.log(reader.result);
-      setImage(reader.result);
+function convertToBase64(e) {
+  const file = e.target.files[0];
+  const reader = new FileReader();
+
+  reader.onload = function (event) {
+    const img = new Image();
+    img.src = event.target.result;
+
+    img.onload = function () {
+      const MAX_WIDTH = 800;
+      const MAX_HEIGHT = 600;
+      let width = img.width;
+      let height = img.height;
+
+      if (width > height) {
+        if (width > MAX_WIDTH) {
+          height *= MAX_WIDTH / width;
+          width = MAX_WIDTH;
+        }
+      } else {
+        if (height > MAX_HEIGHT) {
+          width *= MAX_HEIGHT / height;
+          height = MAX_HEIGHT;
+        }
+      }
+
+      const canvas = document.createElement("canvas");
+      canvas.width = width;
+      canvas.height = height;
+
+      const ctx = canvas.getContext("2d");
+      ctx.drawImage(img, 0, 0, width, height);
+
+      const compressedImageData = canvas.toDataURL(file.type, 0.5); // Adjust compression quality as needed (0.5 = 50% quality)
+
+      setImage(compressedImageData);
     };
-    reader.onerror = function (error) {
-      console.log("Error: ", error);
-    };
-  }
+  };
+
+  reader.readAsDataURL(file);
+}
+
 
   return (
     <div className="p-4">

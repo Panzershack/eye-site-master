@@ -21,6 +21,8 @@ const Home = () => {
   const [selectedEditSupplierId, setSelectedEditSupplierId] = useState(null);
   const [selectedDeleteSupplierId, setSelectedDeleteSupplierId] =
     useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredSuppliers, setFilteredSuppliers] = useState([]);
 
   useEffect(() => {
     setLoading(true);
@@ -37,6 +39,18 @@ const Home = () => {
       });
   }, []);
 
+  useEffect(() => {
+    // Filter suppliers based on search query
+    if (searchQuery.trim() === "") {
+      setFilteredSuppliers(suppliers);
+    } else {
+      const filtered = suppliers.filter((supplier) =>
+        supplier.supplierName.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      setFilteredSuppliers(filtered);
+    }
+  }, [searchQuery, suppliers]);
+
   const handleDownClick = () => {
     if (startIndex + 10 < suppliers.length) {
       setStartIndex((prevIndex) => prevIndex + 1);
@@ -49,13 +63,27 @@ const Home = () => {
     }
   };
 
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+
   return (
     <div className="p-4">
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-3xl">Supplier List</h1>
-        <button onClick={() => setShowCreateModal(true)}>
-          <MdOutlineAddBox className="text-4xl text-red-600" />
-        </button>
+        <div className="flex items-center">
+          <input
+            type="text"
+            placeholder="Search suppliers"
+            value={searchQuery}
+            onChange={handleSearchChange}
+            className="px-4 py-2 border border-gray-300 rounded-l"
+          />
+          <button onClick={() => setShowCreateModal(true)}>
+            <MdOutlineAddBox className="text-4xl text-red-600" />
+          </button>
+        </div>
       </div>
       {loading ? (
         <Spinner />
@@ -82,7 +110,7 @@ const Home = () => {
                 </tr>
               </thead>
               <tbody>
-                {suppliers
+                {filteredSuppliers
                   .slice(startIndex, startIndex + 10)
                   .map((supplier, index) => (
                     <tr key={index} className="bg-white">

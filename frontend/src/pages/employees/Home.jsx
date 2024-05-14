@@ -18,7 +18,10 @@ const Home = () => {
   const [startIndex, setStartIndex] = useState(0);
   const [selectedInfoEmployeeId, setSelectedInfoEmployeeId] = useState(null);
   const [selectedEditEmployeeId, setSelectedEditEmployeeId] = useState(null);
-  const [selectedDeleteEmployeeId, setSelectedDeleteEmployeeId] = useState(null);
+  const [selectedDeleteEmployeeId, setSelectedDeleteEmployeeId] =
+    useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredEmployees, setFilteredEmployees] = useState([]);
 
   useEffect(() => {
     setLoading(true);
@@ -35,6 +38,28 @@ const Home = () => {
       });
   }, []);
 
+  useEffect(() => {
+    // Filter employees based on search query
+    if (searchQuery.trim() === "") {
+      setFilteredEmployees(employees);
+    } else {
+      const filtered = employees.filter((employee) =>
+        `${employee.firstName} ${employee.lastName}`
+          .toLowerCase()
+          .includes(searchQuery.toLowerCase())
+      );
+      setFilteredEmployees(filtered);
+    }
+  }, [searchQuery, employees]);
+
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const openCreateModal = () => {
+    setShowCreateModal(true);
+  };
+
   const handleDownClick = () => {
     if (startIndex + 10 < employees.length) {
       setStartIndex((prevIndex) => prevIndex + 1);
@@ -47,17 +72,22 @@ const Home = () => {
     }
   };
 
-  const openCreateModal = () => {
-    setShowCreateModal(true);
-  };
-
   return (
     <div className="p-4">
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-3xl font-bold">Employee List</h1>
-        <button onClick={openCreateModal}>
-          <MdOutlineAddBox className="text-4xl text-red-600" />
-        </button>
+        <div className="flex items-center">
+          <input
+            type="text"
+            placeholder="Search employees"
+            value={searchQuery}
+            onChange={handleSearchChange}
+            className="px-4 py-2 border border-gray-300 rounded-l"
+          />
+          <button onClick={openCreateModal}>
+            <MdOutlineAddBox className="text-4xl text-red-600" />
+          </button>
+        </div>
       </div>
       {loading ? (
         <Spinner />
@@ -86,7 +116,7 @@ const Home = () => {
                 </tr>
               </thead>
               <tbody>
-                {employees
+                {filteredEmployees
                   .slice(startIndex, startIndex + 10)
                   .map((employee, index) => (
                     <tr key={index} className="text-gray-700">
