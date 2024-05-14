@@ -18,7 +18,6 @@ import {Routes, Route} from 'react-router-dom'
 
 import OurServicesComponent from './pages/OurServicesComponent';
 import AdminDashBoardComponent from './pages/AdminDashBoard';
-import TestCompHome from './authentication/Home';
 import RegisterAndLogin from './authentication/RegisterAndLogin';
 import LoginUI from './pages/login/login';
 import ResetPass from './authentication/ForgotPassword';
@@ -45,7 +44,6 @@ const App = () => {
         <Route path="/admin" element={<AdminDashBoardComponent />} />
         <Route path="/" element={<OurServicesComponent />}></Route>
 
-        <Route path="/home" element={<TestCompHome/>}></Route>
         <Route path="/reglog" element={<RegisterAndLogin/>}></Route>
         <Route path="/reset" element={<ResetPass/>}></Route>
         <Route path="/ui" element={<LoginUI/>}></Route>

@@ -18,7 +18,7 @@ function RegisterAndLogin() {
       createUserWithEmailAndPassword(database, email, password)
         .then((data) => {
           console.log(data, "authData");
-          history("/home");
+          history("/admin");
         })
         .catch((err) => {
           alert(err.code);
@@ -28,7 +28,7 @@ function RegisterAndLogin() {
       signInWithEmailAndPassword(database, email, password)
         .then((data) => {
           console.log(data, "authData");
-          history("/home");
+          history("/admin");
         })
         .catch((err) => {
           alert(err.code);
