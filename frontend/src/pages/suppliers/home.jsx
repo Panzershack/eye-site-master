@@ -5,6 +5,7 @@ import { BsInfoCircle } from "react-icons/bs";
 import { MdOutlineAddBox, MdOutlineDelete } from "react-icons/md";
 import Spinner from "../../components/spinner";
 import Modal from "react-modal";
+import ReactHTMLTableToExcel from "react-html-table-to-excel"
 
 import CreateSupplier from "../suppliers/CreateSupplier";
 import ShowSupplier from "../suppliers/ShowSupplier";
@@ -83,6 +84,14 @@ const Home = () => {
           <button onClick={() => setShowCreateModal(true)}>
             <MdOutlineAddBox className="text-4xl text-red-600" />
           </button>
+          <ReactHTMLTableToExcel
+            id="excelButton"
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-r cursor-pointer ml-4"
+            table="suppliersTable"
+            filename="suppliers"
+            sheet="suppliers"
+            buttonText="Export to Excel"
+          />
         </div>
       </div>
       {loading ? (
@@ -91,7 +100,8 @@ const Home = () => {
         <>
           {error && <p className="text-red-500">{error}</p>}
           <div className="overflow-x-auto">
-            <table className="w-full border border-gray-300">
+            <table className="w-full border border-gray-300"
+            id="suppliersTable">
               <thead>
                 <tr className="bg-gray-200">
                   <th className="px-4 py-2 border border-black">No</th>

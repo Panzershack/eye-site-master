@@ -1,5 +1,6 @@
 import {Routes, Route} from 'react-router-dom'
 
+
 // import CreateConsultation from './pages/consultations/CreateConsultation';
 // import DeleteConsultation from './pages/consultations/DeleteConsultation';
 // import EditConsultation from './pages/consultations/EditConsultation';
@@ -12,11 +13,13 @@ import {Routes, Route} from 'react-router-dom'
 // import ShowInquiry from './pages/inquiries/ShowInquiry';
 // import HomeInq from './pages/inquiries/Home';
 
-import CreateItem from './pages/items/CreateItem';
-import ShowItem from './pages/items/ShowItem';
+
+
 
 import OurServicesComponent from './pages/OurServicesComponent';
 import AdminDashBoardComponent from './pages/AdminDashBoard';
+import RegisterAndLogin from './authentication/RegisterAndLogin';
+import ResetPass from './authentication/ForgotPassword';
 
 
 
@@ -40,8 +43,12 @@ const App = () => {
         <Route path="/admin" element={<AdminDashBoardComponent />} />
         <Route path="/" element={<OurServicesComponent />}></Route>
 
-        <Route path="/items/details/:id" element={< ShowItem/>} />
-        <Route path="/items/create" element={< CreateItem/>} />
+        <Route path="/reglog" element={<RegisterAndLogin/>}></Route>
+        <Route path="/reset" element={<ResetPass/>}></Route>
+
+
+
+       
       </Routes>
     </>
   );
