@@ -1,6 +1,7 @@
 // import { useState } from "react";
 import ConsultationsFormComponent from "../pages/consultations/CreateConsultation";
 import InquiriesFormComponent from "../pages/inquiries/CreateInquiry";
+import Navbar from "../components/navbar";
 
 const OurServicesComponent = () => {
   // const [count, setCount] = useState(0);
@@ -8,6 +9,7 @@ const OurServicesComponent = () => {
   return (
     <div className="app">
       {/* Section 1 */}
+      <Navbar/>
       <div
         className="section section1"
         style={{ width: "100vw", height: "100vh", border: "5px solid black" }}
