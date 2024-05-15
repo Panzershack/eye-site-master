@@ -1,5 +1,4 @@
 import {Routes, Route} from 'react-router-dom'
-import Navbar from './components/navbar';
 
 // import CreateConsultation from './pages/consultations/CreateConsultation';
 // import DeleteConsultation from './pages/consultations/DeleteConsultation';
@@ -26,7 +25,6 @@ const App = () => {
   //5 routes are creayed for 5 different pages
   return (
     <>
-      <Navbar />
       <Routes>
         {/* <Route path='/consultations/home' element={<HomeCons/>}/>
       <Route path='/consultations/create' element={<CreateConsultation/>}/>

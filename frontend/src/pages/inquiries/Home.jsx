@@ -5,6 +5,7 @@ import { AiOutlineEdit } from "react-icons/ai";
 import { MdOutlineDelete } from "react-icons/md";
 import Spinner from "../../components/spinner";
 import Modal from "react-modal"; //for popups
+import ReactHTMLTableToExcel from "react-html-table-to-excel";
 
 import ShowInquiry from "../inquiries/ShowInquiry";
 import EditInquiry from "../inquiries/EditInquiry";
@@ -17,6 +18,7 @@ const HomeInq = () => {
   const [selectedInfoInquiryId, setSelectedInfoInquiryId] = useState(null);
   const [selectedEditInquiryId, setSelectedEditInquiryId] = useState(null);
   const [selectedDeleteInquiryId, setSelectedDeleteInquiryId] = useState(null);
+  const [filterType, setFilterType] = useState("all");
 
   useEffect(() => {
     setLoading(true);
@@ -68,16 +70,50 @@ const HomeInq = () => {
     setSelectedDeleteInquiryId(null);
   };
 
+  const handleFilterChange = (e) => {
+    setFilterType(e.target.value);
+  };
+
+const filteredInquiries = () => {
+  if (filterType === "all") {
+    return inquiries;
+  } else {
+    // Filter inquiries based on the selected type (case-insensitive)
+    return inquiries.filter(
+      (inquiry) => inquiry.Type.toLowerCase() === filterType.toLowerCase()
+    );
+  }
+};
+
   return (
     <div className="p-4">
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-3xl">Inquiries list</h1>
+        <div className="flex items-center">
+          <select
+            className="px-4 py-2 border border-gray-300 rounded-l"
+            value={filterType}
+            onChange={handleFilterChange}
+          >
+            <option value="all">All</option>
+            <option value="feedback">Feedbacks</option>
+            <option value="inquiry">Inquiries</option>
+          </select>
+          <ReactHTMLTableToExcel
+            id="excelButton"
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-r cursor-pointer ml-2"
+            table="inquiriesTable"
+            filename="inquiries"
+            sheet="inquiries"
+            buttonText="Export to Excel"
+          />
+        </div>
       </div>
       {loading ? (
         <Spinner />
       ) : (
         <div className="overflow-x-auto">
-          <table className="w-full border border-gray-300">
+          <table id="inquiriesTable" className="w-full border border-gray-300">
             <thead>
               <tr className="bg-gray-200">
                 <th className="px-4 py-2 border border-black">No</th>
@@ -88,7 +124,7 @@ const HomeInq = () => {
               </tr>
             </thead>
             <tbody>
-              {inquiries
+              {filteredInquiries()
                 .slice(startIndex, startIndex + 10)
                 .map((inquiry, index) => (
                   <tr key={inquiry._id} className="bg-white">
