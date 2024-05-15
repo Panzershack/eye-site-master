@@ -19,7 +19,6 @@ import {Routes, Route} from 'react-router-dom'
 import OurServicesComponent from './pages/OurServicesComponent';
 import AdminDashBoardComponent from './pages/AdminDashBoard';
 import RegisterAndLogin from './authentication/RegisterAndLogin';
-import LoginUI from './pages/login/login';
 import ResetPass from './authentication/ForgotPassword';
 
 
@@ -46,7 +45,7 @@ const App = () => {
 
         <Route path="/reglog" element={<RegisterAndLogin/>}></Route>
         <Route path="/reset" element={<ResetPass/>}></Route>
-        <Route path="/ui" element={<LoginUI/>}></Route>
+
 
 
        

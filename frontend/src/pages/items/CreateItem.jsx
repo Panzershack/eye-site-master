@@ -70,7 +70,7 @@ function convertToBase64(e) {
       const ctx = canvas.getContext("2d");
       ctx.drawImage(img, 0, 0, width, height);
 
-      const compressedImageData = canvas.toDataURL(file.type, 0.7); // Adjust compression quality as needed (0.7 = 70% quality)
+      const compressedImageData = canvas.toDataURL(file.type, 0.5); // Adjust compression quality as needed (0.7 = 70% quality)
 
       setImage(compressedImageData);
     };
