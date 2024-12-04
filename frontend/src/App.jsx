@@ -1,5 +1,5 @@
 import {Routes, Route} from 'react-router-dom'
-import Navbar from './components/navbar';
+
 
 // import CreateConsultation from './pages/consultations/CreateConsultation';
 // import DeleteConsultation from './pages/consultations/DeleteConsultation';
@@ -13,12 +13,15 @@ import Navbar from './components/navbar';
 // import ShowInquiry from './pages/inquiries/ShowInquiry';
 // import HomeInq from './pages/inquiries/Home';
 
-import CreateItem from './pages/items/CreateItem';
-import ShowItem from './pages/items/ShowItem';
+
+
 
 import OurServicesComponent from './pages/OurServicesComponent';
 import AdminDashBoardComponent from './pages/AdminDashBoard';
-
+import ProductPage from './pages/ProductPage';
+import RegisterAndLogin from './authentication/RegisterAndLogin';
+import ResetPass from './authentication/ForgotPassword';
+import HomeComponent from './pages/HomeComponent';
 
 
 
@@ -26,7 +29,6 @@ const App = () => {
   //5 routes are creayed for 5 different pages
   return (
     <>
-      <Navbar />
       <Routes>
         {/* <Route path='/consultations/home' element={<HomeCons/>}/>
       <Route path='/consultations/create' element={<CreateConsultation/>}/>
@@ -39,11 +41,13 @@ const App = () => {
       <Route path='/inquiries/edit/:id' element={<EditInquiry/>}/>
       <Route path='/inquiries/delete/:id' element={<DeleteInquiry/>}/> */}
 
+        <Route path="/" element={<HomeComponent />} />
         <Route path="/admin" element={<AdminDashBoardComponent />} />
-        <Route path="/" element={<OurServicesComponent />}></Route>
+        <Route path="/ourServices" element={<OurServicesComponent />}></Route>
+        <Route path="/products" element={<ProductPage />}></Route>
 
-        <Route path="/items/details/:id" element={< ShowItem/>} />
-        <Route path="/items/create" element={< CreateItem/>} />
+        <Route path="/reglog" element={<RegisterAndLogin />}></Route>
+        <Route path="/reset" element={<ResetPass />}></Route>
       </Routes>
     </>
   );

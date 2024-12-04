@@ -27,7 +27,7 @@ const EditConsultation = ({ consultationId }) => {
         alert("An error has occurred. Please check console");
         console.log(error);
       });
-  }, [consultationId]);
+  }, [consultationId]); // Triggered whenever consultationId changes
 
   const handleEditConsultation = () => {
     const data = {
@@ -40,7 +40,8 @@ const EditConsultation = ({ consultationId }) => {
       .put(`http://localhost:5555/consultations/${consultationId}`, data)
       .then(() => {
         setLoading(false);
-        navigate(`/admin`);
+        navigate(`/admin`, { replace: true }); // Reload the page
+        window.location.reload(); // Reload the page
       })
       .catch((error) => {
         console.log(error);

@@ -59,7 +59,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // Route for update 
-router.put('/edit/:id', async (req, res) => {
+router.put('/:id', async (req, res) => {
     try {
         const { id } = req.params;
         const { Email, Type, Text } = req.body;
